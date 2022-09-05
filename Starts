@@ -1,0 +1,15 @@
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.12;
+
+contract Licitaciones {
+
+struct Licitacion{
+uint ProcessNum;
+string ProcessName;
+uint SuggAmount;
+uint Time;
+
+    }
+mapping(address => string) 
+}s

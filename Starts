@@ -11,15 +11,15 @@ string Ubi;
 uint SuggAmount;
 uint Time;
     }
-event NewLicit (uint licit_Id, uint processNum, uint suggAmount, string ubi, string processName, uint time);
+event NewLicit (address licit_Id, uint processNum, uint suggAmount, string ubi, string processName, uint time);
 Licitacion[] public licitaciones;
-mapping(string => address) public Comp_Licit;
-mapping(address => string) public Comp_Cons;
+mapping(uint => address) public Comp_Licit;
+mapping(uint => address) public Comp_Cons;
 
 function CreateLicit(uint _ProcessNum, uint _SuggAmount, uint _Time, string memory _Ubi, string memory _ProcessName) internal {
-    enum Id = licitaciones.push(Licitacion(_ProcessNum, _ProcessName, _SuggAmount, _Time, _Ubi));
+    uint Id = licitaciones.push(Licitacion(_ProcessNum, _ProcessName, _Ubi, _SuggAmount, _Time));
     Comp_Licit[Id] = msg.sender;
-    NewLicit(Id, _ProcessNum, _SuggAmount, _Ubi, _ProcessName, _Time);
+    Comp_Cons[Id] = msg.sender;
+    NewLicit(msg.sender, _ProcessNum, _SuggAmount, _Ubi, _ProcessName, _Time);
     }
-
 }

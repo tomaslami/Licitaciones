@@ -1,15 +1,25 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.12;
+pragma solidity ^0.8.14;
 
-contract Licitaciones {
+contract Proyecto {
 
-struct Licitacion{
+struct Licitacion {
 uint ProcessNum;
 string ProcessName;
+string Ubi;
 uint SuggAmount;
 uint Time;
-
     }
-mapping(address => string) 
-}s
+event NewLicit (uint licit_Id, uint processNum, uint suggAmount, string ubi, string processName, uint time);
+Licitacion[] public licitaciones;
+mapping(address => string) public Comp_Licit;
+mapping(address => string) public Comp_Cons;
+
+function CreateLicit(uint _ProcessNum, string memory _ProcessName, uint _SuggAmount, uint _Time, string memory _Ubi) internal {
+    uint Id = licitaciones.push(Licitacion(_ProcessNum, _ProcessName, _SuggAmount, _Time, _Ubi)) - 1;
+    Comp_Licit[Id] = msg.sender;
+    NewLicit(Id, _ProcessNum, _SuggAmount, _Ubi, _ProcessName, _Time);
+    }
+
+}
